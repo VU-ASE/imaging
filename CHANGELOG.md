@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.0.1](https://github.com/VU-ASE/imaging/compare/v1.0.0...v1.0.1) (2024-07-29)
+
+
+### Bug Fixes
+
+* rename CoreInfo ([5f3e4e5](https://github.com/VU-ASE/imaging/commit/5f3e4e50d1f2a4516b5959e55488e285f1cb4cd4))
+
 ## 1.0.0 (2024-07-26)
 
 
