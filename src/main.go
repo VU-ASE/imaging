@@ -163,7 +163,7 @@ func run(service roverlib.Service, configuration *roverlib.ServiceConfiguration)
 	defer buf.Close()
 
 	// Y coordinate of the horizontal slice used for steering
-	const sliceY = 270
+	sliceY := int(imgHeightFloat * 0.60)
 
 	// Start with the middle of the image as the preferred X to find the white slice
 	// (assuming that the car starts on the middle of the track)
@@ -243,7 +243,7 @@ func run(service roverlib.Service, configuration *roverlib.ServiceConfiguration)
 					Circle: &pb_output.CanvasObject_Circle{
 						Center: &pb_output.CanvasObject_Point{
 							X: uint32(longestConsecutive.Start),
-							Y: sliceY,
+							Y: uint32(sliceY),
 						},
 						Radius: 1,
 					},
@@ -255,7 +255,7 @@ func run(service roverlib.Service, configuration *roverlib.ServiceConfiguration)
 					Circle: &pb_output.CanvasObject_Circle{
 						Center: &pb_output.CanvasObject_Point{
 							X: uint32(longestConsecutive.End),
-							Y: sliceY,
+							Y: uint32(sliceY),
 						},
 						Radius: 1,
 					},
@@ -267,7 +267,7 @@ func run(service roverlib.Service, configuration *roverlib.ServiceConfiguration)
 					Circle: &pb_output.CanvasObject_Circle{
 						Center: &pb_output.CanvasObject_Point{
 							X: uint32(middleX),
-							Y: sliceY,
+							Y: uint32(sliceY),
 						},
 						Radius: 1,
 					},
@@ -298,7 +298,7 @@ func run(service roverlib.Service, configuration *roverlib.ServiceConfiguration)
 			middleX := (longestConsecutive.Start + longestConsecutive.End) / 2
 			trajectory_points = append(trajectory_points, &pb_output.CameraSensorOutput_Trajectory_Point{
 				X: int32(middleX),
-				Y: sliceY,
+				Y: int32(sliceY),
 			})
 
 			log.Debug().Int("x", middleX).Msg("Trajectory added")
