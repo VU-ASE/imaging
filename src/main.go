@@ -204,7 +204,7 @@ func run(service roverlib.Service, configuration *roverlib.ServiceConfiguration)
 
 		var longestConsecutive *SliceDescriptor = nil
 
-		newBarY := verticalScanUp(&buf, preferredX, imgHeight-1) + 2
+		newBarY := verticalScanUp(&buf, preferredX, imgHeight-10) + 2
 		if newBarY >= imgHeight {
 			newBarY = imgHeight - 1
 		}
