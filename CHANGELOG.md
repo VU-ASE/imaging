@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.2.5](https://github.com/VU-ASE/imaging/compare/v1.2.4...v1.2.5) (2025-04-23)
+
+
+### Bug Fixes
+
+* changed hard-coded "sliceY" to be 60% of "imgHeightFloat" ([a53c36e](https://github.com/VU-ASE/imaging/commit/a53c36ed9e38031cff6b3b0cc863feb66edd9ef3))
+* lower resolutions not fully supported yet, but made code more robust ([928ecec](https://github.com/VU-ASE/imaging/commit/928ecececd1b2e446fa03d767a389f1a755c5a34))
+
 ## [1.2.4](https://github.com/VU-ASE/imaging/compare/v1.2.3...v1.2.4) (2025-03-29)
 
 
