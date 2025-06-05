@@ -6,7 +6,7 @@ BINARY_NAME=imaging
 
 lint:
 	@echo "Lint check..."
-	@golangci-lint run
+	@golangci-lint run -buildvcs=false
 
 
 build: #lint
