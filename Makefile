@@ -28,5 +28,6 @@ clean:
 	@echo "Cleaning all targets for ${BINARY_NAME}"
 	rm -rf $(BUILD_DIR)
 
+# No tests implemented for imaging
 test: lint
-	go test ./src -v -count=1 -timeout 0 -buildvcs=false
+	@echo "Only running lints for imaging"
