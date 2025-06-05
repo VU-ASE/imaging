@@ -1,5 +1,14 @@
 # Changelog
 
+## [1.2.6](https://github.com/VU-ASE/imaging/compare/v1.2.5...v1.2.6) (2025-06-05)
+
+
+### Bug Fixes
+
+* go test ci ([b252b53](https://github.com/VU-ASE/imaging/commit/b252b53f4bd1e7c1321de292e98fedd54b50a249))
+* only running lints ([60b082d](https://github.com/VU-ASE/imaging/commit/60b082d1b05f2dfeac96cd7fedfd98ad2c86220e))
+* removed lint step bc gocv ([13e738b](https://github.com/VU-ASE/imaging/commit/13e738b64685ccb4a001cd78544f2b21e110b0f2))
+
 ## [1.2.5](https://github.com/VU-ASE/imaging/compare/v1.2.4...v1.2.5) (2025-04-23)
 
 
