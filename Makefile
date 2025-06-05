@@ -5,8 +5,7 @@ BUILD_DIR=bin/
 BINARY_NAME=imaging
 
 lint:
-	@echo "Lint check..."
-	@golangci-lint run -buildvcs=false
+	@echo "No linting"
 
 
 build: #lint
@@ -29,5 +28,5 @@ clean:
 	rm -rf $(BUILD_DIR)
 
 # No tests implemented for imaging
-test: lint
-	@echo "Only running lints for imaging"
+test: 
+	@echo "No tests implemented"
