@@ -1,5 +1,20 @@
 # Changelog
 
+## [1.3.0](https://github.com/VU-ASE/imaging/compare/v1.2.5...v1.3.0) (2025-06-11)
+
+
+### Features
+
+* added a PR event trigger for build action ([5c482c8](https://github.com/VU-ASE/imaging/commit/5c482c8809767d889b968f6330561fccb8152702))
+
+
+### Bug Fixes
+
+* go test ci ([b252b53](https://github.com/VU-ASE/imaging/commit/b252b53f4bd1e7c1321de292e98fedd54b50a249))
+* only running lints ([60b082d](https://github.com/VU-ASE/imaging/commit/60b082d1b05f2dfeac96cd7fedfd98ad2c86220e))
+* release-please PR eternally expected ([57ba743](https://github.com/VU-ASE/imaging/commit/57ba74375dbd0e30d48c40b29b7c5c3a373d8a51))
+* removed lint step bc gocv ([13e738b](https://github.com/VU-ASE/imaging/commit/13e738b64685ccb4a001cd78544f2b21e110b0f2))
+
 ## [1.2.5](https://github.com/VU-ASE/imaging/compare/v1.2.4...v1.2.5) (2025-04-23)
 
 
