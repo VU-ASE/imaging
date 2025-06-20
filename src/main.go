@@ -296,12 +296,13 @@ func run(service roverlib.Service, configuration *roverlib.ServiceConfiguration)
 		trajectory_points := make([]*pb_output.CameraSensorOutput_Trajectory_Point, 0)
 		if longestConsecutive != nil {
 			middleX := (longestConsecutive.Start + longestConsecutive.End) / 2
+			normalizedX := (float64(middleX) - float64(imgWidth) / 2.0) / (float64(imgWidth) / 2.0)
 			trajectory_points = append(trajectory_points, &pb_output.CameraSensorOutput_Trajectory_Point{
-				X: int32(middleX),
+				X: int32(normalizedX * 1000),
 				Y: int32(sliceY),
 			})
 
-			log.Debug().Int("x", middleX).Msg("Trajectory added")
+			log.Debug().Int("x", int(normalizedX)).Msg("Trajectory added")
 		} else {
 			log.Debug().Msg("No trajectory added")
 		}
