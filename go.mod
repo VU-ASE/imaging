@@ -3,8 +3,8 @@ module vu/ase/imaging
 go 1.22.0
 
 require (
-	github.com/VU-ASE/rovercom v1.7.0
-	github.com/VU-ASE/roverlib-go v1.2.7
+	github.com/VU-ASE/rovercom/v2 v2.0.0
+	github.com/VU-ASE/roverlib-go/v2 v2.0.0
 	github.com/rs/zerolog v1.33.0
 	gocv.io/x/gocv v0.39.0
 	google.golang.org/protobuf v1.34.2

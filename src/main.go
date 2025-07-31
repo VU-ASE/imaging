@@ -6,8 +6,8 @@ import (
 	"os"
 	"time"
 
-	pb_output "github.com/VU-ASE/rovercom/packages/go/outputs"
-	roverlib "github.com/VU-ASE/roverlib-go/src"
+	pb_output "github.com/VU-ASE/rovercom/v2/packages/go/outputs"
+	roverlib "github.com/VU-ASE/roverlib-go/v2/src"
 	"gocv.io/x/gocv"
 	"google.golang.org/protobuf/proto"
 
@@ -292,16 +292,15 @@ func run(service roverlib.Service, configuration *roverlib.ServiceConfiguration)
 			return err
 		}
 
-		// Create the trajectory, (currently it is just the middle of the longest consecutive slice)
-		trajectory_points := make([]*pb_output.CameraSensorOutput_Trajectory_Point, 0)
+		// Populate the horizontal scan that indicates the edges of the track
+		// (currently, there is just one scan)
+		horizontal_scans := make([]*pb_output.HorizontalScan, 0)
 		if longestConsecutive != nil {
-			middleX := (longestConsecutive.Start + longestConsecutive.End) / 2
-			trajectory_points = append(trajectory_points, &pb_output.CameraSensorOutput_Trajectory_Point{
-				X: int32(middleX),
-				Y: int32(sliceY),
+			horizontal_scans = append(horizontal_scans, &pb_output.HorizontalScan{
+				XLeft:  uint32(longestConsecutive.Start),
+				XRight: uint32(longestConsecutive.End),
+				Y:      uint32(sliceY),
 			})
-
-			log.Debug().Int("x", middleX).Msg("Trajectory added")
 		} else {
 			log.Debug().Msg("No trajectory added")
 		}
@@ -312,15 +311,15 @@ func run(service roverlib.Service, configuration *roverlib.ServiceConfiguration)
 			Timestamp: uint64(time.Now().UnixMilli()),
 			SensorOutput: &pb_output.SensorOutput_CameraOutput{
 				CameraOutput: &pb_output.CameraSensorOutput{
-					DebugFrame: &pb_output.CameraSensorOutput_DebugFrame{
-						Jpeg:   imgBytes.GetBytes(),
-						Canvas: &canvas,
-					},
-					Trajectory: &pb_output.CameraSensorOutput_Trajectory{
-						Points: trajectory_points,
+					Resolution: &pb_output.Resolution{
 						Width:  uint32(imgWidth),
 						Height: uint32(imgHeight),
 					},
+					DebugFrame: &pb_output.DebugFrame{
+						Jpeg:   imgBytes.GetBytes(),
+						Canvas: &canvas,
+					},
+					HorizontalScans: horizontal_scans,
 				},
 			},
 		}
