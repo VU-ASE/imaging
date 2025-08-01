@@ -1,5 +1,16 @@
 # Changelog
 
+## [2.0.0](https://github.com/VU-ASE/imaging/compare/v1.3.0...v2.0.0) (2025-07-31)
+
+
+### ⚠ BREAKING CHANGES
+
+* update to rovercom v2
+
+### Features
+
+* update to rovercom v2 ([1ec61dd](https://github.com/VU-ASE/imaging/commit/1ec61dd39cadf35c34bfeaa8907f1e46f056d06b))
+
 ## [1.3.0](https://github.com/VU-ASE/imaging/compare/v1.2.5...v1.3.0) (2025-06-11)
 
 
