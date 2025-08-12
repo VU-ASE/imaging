@@ -7,5 +7,5 @@
 </div>
 <br/>
 
-**The `imaging` service captures a camera frame using gstreamer and preprocesses it, exposing the detected track edges on its write stream.**
+**This repository houses the `imaging` [service](https://ase.vu.nl/docs/framework/glossary/service), which can be used in a [pipeline](https://ase.vu.nl/docs/framework/glossary/pipeline) on an ASE Rover. To get started, take a look at its [documentation](https://ase.vu.nl/docs/category/imaging)**
 

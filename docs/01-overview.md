@@ -1,22 +1,56 @@
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
 # Overview
-The `imaging` service captures a image frame using `gstreamer`, does some preprocessing and finds the edges of the track. While we won't go too in-depth here, the preprocessing of the image does roughly the following:
 
-1. Convert the RGB image to grayscale.
+## Purpose 
 
-![original_image](https://github.com/user-attachments/assets/3e289b3e-bbf6-4e8f-a0ae-c09787e71934)
+The `imaging` service captures an image frame from a USB webcam using `gstreamer`. It then does some processing and finds the edges of the NXP cup track. This data can be used by another service to then drive and steer on.
 
-![after_grayscale](https://github.com/user-attachments/assets/a9e00fec-eb06-43d1-ad5d-3b202db54001)
+## Installation
 
+To install this service, the latest release of [`roverctl`](https://ase.vu.nl/docs/framework/Software/rover/roverctl/installation) should be installed for your system and your Rover should be powered on.
 
-2. Convert the grayscale image to black and white via [*thresholding*](https://en.wikipedia.org/wiki/Thresholding_(image_processing)). The key parameter here is the threshold value which is fixed.
+<Tabs groupId="installation-method">
+<TabItem value="roverctl" label="Using roverctl" default>
 
-![after_thresholding](https://github.com/user-attachments/assets/69987076-3d72-47d3-bed6-b540323e7865)
+1. Install the service from your terminal
+```bash
+# Replace ROVER_NUMBER with your the number label on your Rover (e.g. 7)
+roverctl service install -r <ROVER_NUMBER> https://github.com/VU-ASE/imaging/releases/latest/download/imaging.zip 
+```
 
+</TabItem>
+<TabItem value="roverctl-web" label="Using roverctl-web">
 
-Notice how there is clearly a white track, but with some additional artifacts from the floor's reflection. There are many techniques in dealing with such artifacts as well as ways in making the algorithm that follows more robust, however we won't dive into that here.
+1. Open `roverctl-web` for your Rover
+```bash
+# Replace ROVER_NUMBER with your the number label on your Rover (e.g. 7)
+roverctl -r <ROVER_NUMBER>
+```
+2. Click on "install a service" button on the bottom left, and click "install from URL"
+3. Enter the URL of the latest release:
+```
+https://github.com/VU-ASE/imaging/releases/latest/download/imaging.zip 
+```
 
-Then, the algorithm for finding the edges is rather simple. It takes as input the binary image from Step 2 and makes a vertical scan up from the bottom center of the image, returning the y-coordinate of the first black pixel that it finds. If it doesn't find a black pixel after crossing the bottom half of the image, it simply returns the middle of the screen. This is then the place where a horizontal scan is taken with a similar approach to find the left and right edges of the track.
+</TabItem>
+</Tabs>
 
-![with_points](https://github.com/user-attachments/assets/5b3c7df6-874a-4ec9-9d15-cb725457faf6)
+Follow [this tutorial](https://ase.vu.nl/docs/tutorials/write-a-service/upload) to understand how to use an ASE service. You can find more useful `roverctl` commands [here](/docs/framework/Software/rover/roverctl/usage)
 
+## Requirements
 
+- A USB camera should be connected to your Rover. By default, this service will attempt to read from a 30fps 640x480 camera on /dev/video2
+    - If you want to use another camera, you should modify this service's [*service.yaml*](https://github.com/VU-ASE/imaging/blob/1b16f3b453c8a564112f7ce9a0342be271e299a0/service.yaml#L32) and upload your service again.
+
+## Inputs
+
+As defined in the [*service.yaml*](https://github.com/VU-ASE/imaging/blob/main/service.yaml), this service does not depend on any other service.
+
+## Outputs
+
+As defined in the [*service.yaml*](https://github.com/VU-ASE/imaging/blob/main/service.yaml), this service exposes the following write streams:
+
+- `path`:
+    - To this stream, [`CameraSensorOutput`](https://github.com/VU-ASE/rovercom/blob/main/definitions/outputs/camera.proto) messages will be written. Each message will be wrapped in a [`SensorOutput` wrapper message](https://github.com/VU-ASE/rovercom/blob/main/definitions/outputs/wrapper.proto)
